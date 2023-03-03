@@ -13,6 +13,8 @@ const displayAI = (tools , dataLimit) => {
   const toolsContainer = document.getElementById("tools-container");
   toolsContainer.innerHTML = "";
 
+   // display all ai by date to date when "sort by date "button clicked
+
   // display all ai when show all button clicked
   const showAll = document.getElementById("show-all");
   if(dataLimit && tools.length > 6){
@@ -26,6 +28,9 @@ const displayAI = (tools , dataLimit) => {
   tools.forEach((tool) => {
     // console.log(tool);
     const { name, image, published_in, features } = tool;
+
+ 
+
     const createDiv = document.createElement("div");
     createDiv.classList.add("col", "mb-3");
     createDiv.innerHTML = `         
@@ -45,7 +50,9 @@ const displayAI = (tools , dataLimit) => {
               <h3 class="card-title" >${name}</h3>
               <i class="fa-regular fa-calendar-days "></i>  <span>${published_in}</span>
             </div>
-            <i class="fa-solid fa-circle-arrow-right fa-2x text-danger" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal"></i>
+           
+            <i class="fa-solid fa-circle-arrow-right fa-2x text-danger cursor" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+          
           </div>
         </div>
     `;
@@ -54,6 +61,9 @@ const displayAI = (tools , dataLimit) => {
 //  toggleSpinner(false);
 };
 
+// Make serial by date
+
+// Showing all tools when seen more clicked
 document.getElementById("btn-show-all").addEventListener('click', function(){
   fetchAI();
   // toggleSpinner(false);

@@ -31,13 +31,27 @@
       height: 300px;
       border-radius: 16px;
     }
+    .cursor {
+      cursor: pointer;
+    }
+    .position {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+    .position-accuracy{
+      position: absolute;
+      top: 0;
+      right: -50px;
+    } 
   </style>
   <body class="container">
     <h1 class="h1 text-center m-4">AI Universe Hub</h1>
     <!-- Sort By Date -->
-    <div class="text-center mb-4">
-      <button id="sort-by-date" class="btn btn-danger">Sort By Date</button>
+    <div id="sort-by-date" class="text-center mb-4">
+      <button id="sort-by-date-btn" class="btn btn-danger">Sort By Date</button>
     </div>
+
     <main>
       <!-- Cars Section -->
       <section>
@@ -62,28 +76,84 @@
         </div>
       </section>
 
-      <!-- modal contents -->
+      <!-- Modal contents -->
       <section>
         <!-- Modal -->
         <div
           class="modal fade"
-          id="phoneDetailsModal"
+          id="exampleModal"
           tabindex="-1"
-          aria-labelledby="phoneDetailsModalLabel"
+          aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog">
+          <div class="modal-dialog modal-xl">
             <div class="modal-content">
               <div class="modal-header">
-                <!-- <h1 class="modal-title fs-5" id="phoneDetailsModalLabel"></h1> -->
                 <button
                   type="button"
-                  class="btn-close"
+                  class="btn btn-danger rounded-circle position"
                   data-bs-dismiss="modal"
                   aria-label="Close"
-                ></button>
+                >
+                  X
+                </button>
               </div>
-              <div id="modal-body" class="modal-body"></div>
+
+              <div id="modal-body" class="modal-body">
+                <div
+                id=""
+                class="row row-cols-1 row-cols-md-2 g-4 "
+              >
+              <div class="col">
+                <div class="card bg-body-secondary">
+                  <div class="card-body">
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="row row-cols-1 row-cols-md-3 g-4" >
+                      <div class="col">
+                        <div class="card ">
+                          <div class="card-body ">
+                            <p class="text-success">$10/month Basic</p>
+                          </div>
+                         </div> 
+                      </div>
+                      <div class="col">
+                        <div class="card ">
+                          <div class="card-body ">
+                            <p class="text-success">$10/month Basic</p>
+                          </div>
+                         </div> 
+                      </div>
+                      <div class="col">
+                        <div class="card ">
+                          <div class="card-body">
+                            <p class="text-success">$10/month Basic</p>
+                          </div>
+                         </div> 
+                      </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                      <div class="col h5">Features</div>
+                      <div class="col h5">Integrations</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col ">
+                <div class="card">
+                  <div class="card-body">
+                    <div>
+                      <img src="" alt="" class="card-img-top img-fluid ">
+                      <button class="btn btn-danger position-absolute top-0 end-0">94% accuracy</button>
+                    </div>
+                    <div class="text-center">
+                      <h4 class="h5">Hi, how are you doing today?</h4>
+                      <p class="card-text text-center">I'm doing well, thank you for asking. How can I assist you today?</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              </div>
             </div>
           </div>
         </div>
