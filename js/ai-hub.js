@@ -1,17 +1,28 @@
 // Load AI Universe Hub API by fetch
-const fetchAI = () => {
+const fetchAI = (dataLimit) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayAI(data.data.tools))
+    .then((data) => displayAI(data.data.tools, dataLimit))
     .catch((error) => {
       console.error(error);
     });
 };
 
-const displayAI = (tools) => {
+const displayAI = (tools , dataLimit) => {
   const toolsContainer = document.getElementById("tools-container");
-//   toolsContainer.innerHTML = "";
+  toolsContainer.innerHTML = "";
+
+  // display all ai when show all button clicked
+  const showAll = document.getElementById("show-all");
+  if(dataLimit && tools.length > 6){
+    tools = tools.slice(0,6);
+    showAll.classList.remove("d-none");
+  }
+  else{
+    showAll.classList.add("d-none");
+  }
+
   tools.forEach((tool) => {
     // console.log(tool);
     const { name, image, published_in, features } = tool;
@@ -34,11 +45,15 @@ const displayAI = (tools) => {
               <h3 class="card-title" >${name}</h3>
               <i class="fa-regular fa-calendar-days "></i>  <span>${published_in}</span>
             </div>
-            <i class="fa-solid fa-circle-arrow-right fa-2x text-danger"></i>
+            <i id="modal"  class="fa-solid fa-circle-arrow-right fa-2x text-danger"></i>
           </div>
         </div>
     `;
     toolsContainer.appendChild(createDiv);
   });
 };
-fetchAI();
+
+document.getElementById("btn-show-all").addEventListener('click', function(){
+  fetchAI();
+});
+fetchAI(7);
