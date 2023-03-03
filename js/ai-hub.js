@@ -45,15 +45,31 @@ const displayAI = (tools , dataLimit) => {
               <h3 class="card-title" >${name}</h3>
               <i class="fa-regular fa-calendar-days "></i>  <span>${published_in}</span>
             </div>
-            <i id="modal"  class="fa-solid fa-circle-arrow-right fa-2x text-danger"></i>
+            <i class="fa-solid fa-circle-arrow-right fa-2x text-danger" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal"></i>
           </div>
         </div>
     `;
     toolsContainer.appendChild(createDiv);
   });
+//  toggleSpinner(false);
 };
 
 document.getElementById("btn-show-all").addEventListener('click', function(){
   fetchAI();
+  // toggleSpinner(false);
 });
-fetchAI(7);
+
+// Spinner
+const toggleSpinner = isLoading =>{
+  const loaderSection = document.getElementById("loader");
+  if(isLoading){
+    loaderSection.classList.remove("d-none");
+    fetchAI(7);
+    loaderSection.classList.add("d-none");
+  }else{
+    loaderSection.classList.remove("d-none");
+  }
+};
+
+toggleSpinner(true) ;
+
