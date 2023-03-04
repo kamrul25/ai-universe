@@ -32,7 +32,7 @@ const displayAi = (tools, dataLimit) => {
     createDiv.classList.add("col", "mb-3");
     createDiv.innerHTML = `         
         <div class="card p-3 ">
-          <img src=${image} class="card-img-top img-fluid image " alt="">
+          <img src=${image} class="card-img-top img-fluid rounded image-height"  alt="">
           <div class="">
             <h3 class="card-title mt-4 mb-3">Features</h3>
             <div class="card-text">

@@ -22,10 +22,13 @@
     * {
       font-family: "Work Sans", sans-serif;
     }
-    .image {
-      width: 437px;
+    .image-height{
       height: 300px;
-      border-radius: 16px;
+    }
+    @media screen and (max-width:576px) {
+      .image-height{
+        height: 200px;
+    } 
     }
     .cursor {
       cursor: pointer;
@@ -52,14 +55,14 @@
       height: 108px;
     }
   </style>
-  <body class="container">
+  <body>
     <h1 class="h1 text-center m-4">AI Universe Hub</h1>
     <!-- Sort By Date -->
     <div id="sort-by-date" class="text-center mb-4">
       <button id="sort-by-date-btn" class="btn btn-danger">Sort By Date</button>
     </div>
 
-    <main>
+    <main class="m-5">
       <!-- Cars Section -->
       <section>
         <div
