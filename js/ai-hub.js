@@ -79,16 +79,16 @@ const displayAiDetails = (data) => {
   <div class="card bg-body-secondary">
     <div class="card-body">
       <h3>${description}</h3>
-      <div id="price-card" onload="pricingLoad()" class="row row-cols-1 row-cols-md-3 g-4 mt-3" >
+      <div id="price-card" onload="pricingLoad()" class="row row-cols-2 row-cols-md-3 g-4 mt-3" >
       </div>
       <div  onload="qualificationLoad()" class="row row-cols-1 row-cols-md-2 g-4 mt-3">
         <div class="col">
-        <h5 class="h4">Features</h5>
-        <ul id="features-container" onload="featuresLoad()"></ul>
+          <h5 class="h4">Features</h5>
+          <ul id="features-container" onload="featuresLoad()"></ul>
         </div>
         <div class="col ">
-        <h5 class="h4">Integrations</h5>
-        <ul id="integrations-container" onload="integrationsLoad()"></ul>
+          <h5 class="h4">Integrations</h5>
+          <ul id="integrations-container" onload="integrationsLoad()"></ul>
         </div>
       </div>
     </div>
@@ -112,25 +112,31 @@ const displayAiDetails = (data) => {
       pricingCard.innerHTML = `
       <div class="col ">
         <div class="card modal-nested-card" >
-          <div class="card-body text-success text-center">
-            <span>${pricing[0] ? pricing[0].price : ""}</span> <br>
-            <span>${pricing[0] ? pricing[0].plan : ""}</span>
+          <div class="card-body  text-success ">
+            <div class ="text-center">
+              <span>${pricing[0] ? pricing[0].price : ""}</span> <br>
+              <span >${pricing[0] ? pricing[0].plan : ""}</span>
+            </div>
           </div>
        </div> 
       </div> 
       <div class="col ">
         <div class="card modal-nested-card" >
-          <div class="card-body text-warning-emphasis text-center">
-            <span>${pricing[1] ? pricing[1].price : ""}</span> <br>
-            <span>${pricing[1] ? pricing[1].plan : ""}</span>
+          <div class="card-body text-warning-emphasis ">
+            <div class ="text-center">          
+              <span>${pricing[1] ? pricing[1].price : ""}</span> <br>
+              <span>${pricing[1] ? pricing[1].plan : ""}</span>
+              </div>
           </div>
         </div> 
       </div> 
       <div class="col ">
         <div class="card modal-nested-card" >
-          <div class="card-body text-danger text-center">
-            <span>${pricing[2] ? pricing[2].price : ""}/</span> <br>
-            <span>${pricing[2] ? pricing[2].plan : ""}</span>
+          <div class="card-body text-danger ">
+            <div class ="text-center">
+             <span>${pricing[2] ? pricing[2].price : ""}/</span> <br>
+             <span >${pricing[2] ? pricing[2].plan : ""}</span>
+            </div>
           </div>
         </div> 
       </div> 
