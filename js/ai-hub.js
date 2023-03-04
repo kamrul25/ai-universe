@@ -53,7 +53,6 @@ const displayAi = (tools, dataLimit) => {
     `;
     toolsContainer.appendChild(createDiv);
   });
-  //  toggleSpinner(false);
 };
 
 // Make serial by date
@@ -61,12 +60,10 @@ const displayAi = (tools, dataLimit) => {
 // Showing all tools when seen more clicked
 document.getElementById("btn-show-all").addEventListener("click", function () {
   fetchAi();
-  // toggleSpinner(false);
 });
 
 // load data by id for modal
 const fetchAiDetails = (id) => {
-  // console.log(id)
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   fetch(url)
     .then((res) => res.json())
@@ -75,10 +72,29 @@ const fetchAiDetails = (id) => {
 };
 // Display details about ai tool
 const displayAiDetails = (data) => {
-  const { image_link, input_output_examples, accuracy } = data;
-
+  const {image_link, input_output_examples, accuracy, description, features, integrations, pricing, } = data;
   const modalDetails = document.getElementById("modal-details");
   modalDetails.innerHTML = `
+ <div class="col">
+  <div class="card bg-body-secondary">
+    <div class="card-body">
+      <h3>${description}</h3>
+      <div id="price-card" onload="pricingLoad()" class="row row-cols-1 row-cols-md-3 g-4 mt-3" >
+      </div>
+      <div  onload="qualificationLoad()" class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+        <div class="col">
+        <h5 class="h4">Features</h5>
+        <ul id="features-container" onload="featuresLoad()"></ul>
+        </div>
+        <div class="col ">
+        <h5 class="h4">Integrations</h5>
+        <ul id="integrations-container" onload="integrationsLoad()"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="col ">
   <div class="card">
     <div class="card-body" onload="">
@@ -89,33 +105,129 @@ const displayAiDetails = (data) => {
   </div>
 </div>
   `;
-  const accuracyButton =()=>{
+  // Pricing cards
+  const pricingLoad = () => {
+    const pricingCard = document.getElementById("price-card");
+    if (pricing) {
+      pricingCard.innerHTML = `
+      <div class="col ">
+        <div class="card modal-nested-card" >
+          <div class="card-body text-success text-center">
+            <span>${pricing[0] ? pricing[0].price : ""}</span> <br>
+            <span>${pricing[0] ? pricing[0].plan : ""}</span>
+          </div>
+       </div> 
+      </div> 
+      <div class="col ">
+        <div class="card modal-nested-card" >
+          <div class="card-body text-warning-emphasis text-center">
+            <span>${pricing[1] ? pricing[1].price : ""}</span> <br>
+            <span>${pricing[1] ? pricing[1].plan : ""}</span>
+          </div>
+        </div> 
+      </div> 
+      <div class="col ">
+        <div class="card modal-nested-card" >
+          <div class="card-body text-danger text-center">
+            <span>${pricing[2] ? pricing[2].price : ""}/</span> <br>
+            <span>${pricing[2] ? pricing[2].plan : ""}</span>
+          </div>
+        </div> 
+      </div> 
+      `;
+    } else {
+      pricingCard.innerHTML = `
+      <div class="col ">
+        <div class="card modal-nested-card" >
+          <div class="card-body text-success text-center">
+            <span>Free of cost</span> <br>
+            <span>/Basic</span>
+          </div>
+        </div> 
+      </div> 
+      <div class="col ">
+        <div class="card modal-nested-card" >
+          <div class="card-body text-warning-emphasis text-center">
+            <span>Free of cost</span> <br>
+            <span>/Pro</span>
+          </div>
+        </div> 
+      </div> 
+      <div class="col ">
+        <div class="card modal-nested-card" >
+         <div class="card-body text-danger text-center">
+            <span>Free of cost</span> <br>
+            <span>/Enterprise</span>
+          </div>
+        </div> 
+      </div> 
+      `;
+    }
+  };
+  pricingLoad();
+  // Feature 
+  const featuresLoad =()=>{
+    const featuresContainer = document.getElementById("features-container");
+    if(features){
+      for(const key in features){
+        const li = document.createElement("li");
+        li.innerHTML = `${features[key].feature_name}`;
+        featuresContainer.appendChild(li);
+      }
+    }else{
+      featuresContainer.innerHTML=`<p class="card-title">No data Found</p>`;
+    }
+  }
+  featuresLoad();
+  // Integrations
+  const integrationsLoad = () =>{
+    const integrationsContainer = document.getElementById("integrations-container");
+    if(integrations){
+      integrations.forEach(integration => {
+       const li = document.createElement("li");
+       li.innerHTML = `${integration}`;
+       integrationsContainer.appendChild(li);
+      })
+    }else{
+      integrationsContainer.innerHTML=`<p class="card-title">No data Found</p>`;
+    }
+  }
+  integrationsLoad();
+  // Accuracy Button
+  const accuracyButton = () => {
     const accuracyDetail = document.getElementById("accuracy-btn");
     const examples = document.getElementById("examples");
-    if(accuracy.score){
-      accuracyDetail.innerHTML =`${accuracy.score} accuracy`;
-      if(input_output_examples){
-        examples.innerHTML =`
-        <h5 class="h5">${input_output_examples[0].input}</h5>
-        <p class="card-title">${input_output_examples[0].output}</p>
+    if (accuracy.score) {
+      accuracyDetail.innerHTML = `${accuracy.score} accuracy`;
+      if (input_output_examples) {
+        examples.innerHTML = `
+        <h5 class="h5">${
+          input_output_examples[0] ? input_output_examples[0].input : ""
+        }</h5>
+        <p class="card-title">${
+          input_output_examples[0] ? input_output_examples[0].output : ""
+        }</p>
         `;
-      }else{
-        examples.innerHTML ="";
+      } else {
+        examples.innerHTML = "";
       }
-    }
-    else{
+    } else {
       accuracyDetail.classList.add("d-none");
-      if(input_output_examples){
-        examples.innerHTML =`
-        <h5 class="h5">${input_output_examples[1].input}</h5>
-        <p class="card-title">${input_output_examples[1].output}</p>
+      if (input_output_examples) {
+        examples.innerHTML = `
+        <h5 class="h5">${
+          input_output_examples[1] ? input_output_examples[1].input : ""
+        }</h5>
+        <p class="card-title">${
+          input_output_examples[1] ? input_output_examples[1].output : ""
+        }</p>
         `;
-      }else{
-        examples.innerHTML ="";
+      } else {
+        examples.innerHTML = "";
       }
     }
-  }  
-  accuracyButton()
+  };
+  accuracyButton();
 };
 
 // Spinner
