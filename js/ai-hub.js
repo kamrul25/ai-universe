@@ -12,9 +12,7 @@ const fetchAi = (dataLimit) => {
 const displayAi = (tools, dataLimit) => {
   const toolsContainer = document.getElementById("tools-container");
   toolsContainer.innerHTML = "";
-
-  // display all ai by date to date when "sort by date "button clicked
-
+ 
   // display all ai when show all button clicked
   const showAll = document.getElementById("show-all");
   if (dataLimit && tools.length > 6) {
@@ -25,8 +23,7 @@ const displayAi = (tools, dataLimit) => {
   }
 
   tools.forEach((tool) => {
-    // console.log(tool);
-    const { id, name, image, published_in, features } = tool;
+    const { id, name, image, published_in, features} = tool;
 
     const createDiv = document.createElement("div");
     createDiv.classList.add("col", "mb-3");
@@ -35,11 +32,14 @@ const displayAi = (tools, dataLimit) => {
           <img src=${image} class="card-img-top img-fluid rounded image-height"  alt="">
           <div class="">
             <h3 class="card-title mt-4 mb-3">Features</h3>
-            <div class="card-text">
-              <p >1. ${features[0]}</p>
-              <p >2. ${features[1]}</p>
-              <p >3. ${features[2] ? features[2] : ""}</p>
-            </div>
+            <ol>
+                <li>${features[0]}</li>
+                <li>${features[1]}</li>
+               <div id="displayFeatures-container"  onload="displayFeature()">
+               <li id="third-li" class="">${features[2]}</li>
+               <li id="fourth-li" class="d-none" >${features[3]}</li>
+               </div
+            </ol>
           </div>
           <hr class="">
           <div class="d-flex justify-content-between align-items-center">
@@ -52,11 +52,39 @@ const displayAi = (tools, dataLimit) => {
         </div>
     `;
     toolsContainer.appendChild(createDiv);
+     
+    const displayFeature =()=>{
+      // const container = document.getElementById("displayFeatures-container");
+      // if(features[2]){
+      //   console.log(features[2]);
+      //   const thirdLi = document.getElementById("third-li");
+      //   thirdLi.classList.remove("d-none");
+      // }else{
+      //   const thirdLi = document.getElementById("third-li");
+      //   thirdLi.classList.remove("d-none");
+      //   const fourthLi = document.getElementById("fourth-li");
+      //   fourthLi.classList.remove("d-none");
+      // }
+      // // if(features[2] || features[3]){
+   
+      // // }
+      // // else{
+      // //   const container = document.getElementById("displayFeatures-container");
+      // //   container.classList.add("d-none");
+      // // }
+    }
+    displayFeature();
   });
+
+
+    
 };
 
 // Make serial by date
-
+document.getElementById("sort-by-date-btn").addEventListener('click', function(){
+  // displayAi();
+  // fetchAi();
+});
 // Showing all tools when seen more clicked
 document.getElementById("btn-show-all").addEventListener("click", function () {
   fetchAi();
