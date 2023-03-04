@@ -127,7 +127,7 @@ const displayAiDetails = (data) => {
   <div class="card">
     <div class="card-body" onload="">
         <img src=${image_link[0]} alt="" class="card-img-top img-fluid ">
-        <button id="accuracy-btn" onload="accuracyButton()" class="btn btn-danger position-accuracy "></button>
+        <button id="accuracy-btn" onload="accuracyButton()" class="btn btn-danger position-absolute top-0 end-0 "></button>
         <div id="examples" class="text-center mt-4"></div>
     </div>
   </div>
@@ -236,28 +236,34 @@ const displayAiDetails = (data) => {
       if (input_output_examples) {
         examples.innerHTML = `
         <h5 class="h5">${
-          input_output_examples[0] ? input_output_examples[0].input : ""
+          input_output_examples[0] ? input_output_examples[0].input : "Can you give any example?"
         }</h5>
         <p class="card-title">${
-          input_output_examples[0] ? input_output_examples[0].output : ""
+          input_output_examples[0] ? input_output_examples[0].output : "No! Not Yet! Take a break!!!"
         }</p>
         `;
       } else {
-        examples.innerHTML = "";
+        examples.innerHTML = `
+        <h5 class="h4">Can you give any example?</h5>
+        <p class="card-title">No! Not Yet! Take a break!!!</p>
+        `;
       }
     } else {
       accuracyDetail.classList.add("d-none");
       if (input_output_examples) {
         examples.innerHTML = `
         <h5 class="h5">${
-          input_output_examples[1] ? input_output_examples[1].input : ""
+          input_output_examples[1] ? input_output_examples[1].input : "Can you give any example?"
         }</h5>
         <p class="card-title">${
-          input_output_examples[1] ? input_output_examples[1].output : ""
+          input_output_examples[1] ? input_output_examples[1].output : "No! Not Yet! Take a break!!!"
         }</p>
         `;
       } else {
-        examples.innerHTML = "";
+        examples.innerHTML = `
+        <h5 class="h4">Can you give any example?</h5>
+        <p class="card-title">No! Not Yet! Take a break!!!</p>
+        `;
       }
     }
   };
